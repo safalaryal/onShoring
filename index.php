@@ -5,152 +5,115 @@
 <?php include("header.php"); ?>
 
 <div class="container">
-<h1>
+  <h1>
     Visitor's Signup form
-</h1>
-<form >
-  <div class="form-row">
-    <div class="form-group col-md-6">
-      <label for="inputEmail4">Email</label>
-      <input type="email" class="form-control" id="inputEmail4" placeholder="Email">
+  </h1>
+  <form action="insert.php" method="POST">
+
+    <div class="col-md-4 form-group" style="display:inline-block">
+      <input type="text" class="form-control" name="visitorName" id="Visitor_name" placeholder="Name" required>
     </div>
-    <div class="form-group col-md-6">
-      <label for="inputPassword4">Password</label>
-      <input type="password" class="form-control" id="inputPassword4" placeholder="Password">
+    <div class=" col-md-4 form-group" style="display:inline-block ">
+      <input type="text" class="form-control" name="visitorSurname" id="Visitor_Surname" placeholder="Surname" required>
     </div>
-  </div>
-  <div class="form-group">
-    <label for="inputAddress">Address</label>
-    <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
-  </div>
-  <div class="form-group">
-    <label for="inputAddress2">Address 2</label>
-    <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
-  </div>
-  <div class="form-row">
-    <div class="form-group col-md-6">
-      <label for="inputCity">City</label>
-      <input type="text" class="form-control" id="inputCity">
+    <div class=" col-md-4 form-group " style="display:inline-block">
+      <input type="email" class="form-control" name="visitorEmail" id="Visitor_Email" placeholder="Email" required>
     </div>
-    <div class="form-group col-md-4">
-      <label for="inputState">State</label>
-      <select id="inputState" class="form-control">
-        <option selected>Choose...</option>
-        <option>...</option>
+    <div class=" col-md-4 form-group" style="display:inline-block">
+      <input type="text" class="form-control" name="visitorPhone" id="Visitor_Phone" placeholder="Phone" required>
+    </div>
+
+    <div class=" col-md-4 form-group" style="display:inline-block">
+      <input type="phone" class="form-control" name="visitorCompany" id="Visitor_Company" placeholder="Company's Name(optional)">
+    </div>
+    <div class=" col-md-4 form-group " style="display:inline-block">
+      <select class="dropdown btn-lg btn-secondary dropdown-toggle" name="visitorGender" required>
+        <option selected hidden value="">Gender</option>
+        <option value="m">Male</option>
+        <option value="f">Female</option>
+
       </select>
     </div>
-    <div class="form-group col-md-2">
-      <label for="inputZip">Zip</label>
-      <input type="text" class="form-control" id="inputZip">
+    <div class=" col-md-4 form-group " style="display:inline-block">
+      <select name="visitorVisiting" style="text-align:center text-align-last:center  " class="dropdown btn-lg btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" required>
+        <option selected hidden value="">Visiting?</option>
+        <option value="John">John Benjamin</option>
+        <option value="Alberta">Alberta wick</option>
+        <option value="Harry">Harry Styles</option>
+        <option value="Lewis">Lewis Miller</option>
+        <option value="Cong">Cong lee</option>
+
+      </select>
     </div>
-  </div>
-  <div class="form-group">
-    <div class="form-check">
-      <input class="form-check-input" type="checkbox" id="gridCheck">
-      <label class="form-check-label" for="gridCheck">
-        Check me out
-      </label>
+    <div class=" col-md-4 form-group" style="display:inline-block">
+      <input type="text" class="form-control" name="visitorType" id="Visitor_Type" placeholder="Visitor Type">
     </div>
-  </div>
-  <button type="submit" class="btn btn-primary">Sign in</button>
-  <div >
-	<video autoplay="true" id="videoElement">
-	
-	</video>
-</div>
-</form>
+    <div class=" col-md-4 form-group" style="display:inline-block">
+      <input type="file" class="form-control" name="visitorImage" id="visitor_Image" placeholder="Choose image">
+    </div>
+
+    <button class="btn btn-primary" type="submit" value="Submit">Submit</button>
+  </form>
 </div>
 
- 
-<style>
-#container {
-	margin: 0px auto;
-	width: 500px;
-	height: 375px;
-	border: 10px #333 solid;
-}
-#videoElement {
-	width: 500px;
-	height: 375px;
-	background-color: #666;
-}
-</style>
-
- 
 
 
-<script>
-var video = document.querySelector("#videoElement");
 
-if (navigator.mediaDevices.getUserMedia) {
-  navigator.mediaDevices.getUserMedia({ video: true })
-    .then(function (stream) {
-      video.srcObject = stream;
-    })
-    .catch(function (err0r) {
-      console.log("Something went wrong!");
-    });
-}
-if (navigator.mediaDevices.getUserMedia) {
-  navigator.mediaDevices.getUserMedia({ video: true })
-    .then(function (stream) {
-      video.srcObject = stream;
-    })
-    .catch(function (err0r) {
-      console.log("Something went wrong!");
-    });
-}
-</script>
+
+
+
+
 
 <?php // function to escape data and strip tags
-function safestrip($string){
-       $string = strip_tags($string);
-       $string = mysql_real_escape_string($string);
-       return $string;
+function safestrip($string)
+{
+  $string = strip_tags($string);
+  $string = mysql_real_escape_string($string);
+  return $string;
 }
 
 //function to show any messages
-function messages() {
-   $message = '';
-   if($_SESSION['success'] != '') {
-       $message = '<span class="success" id="message">'.$_SESSION['success'].'</span>';
-       $_SESSION['success'] = '';
-   }
-   if($_SESSION['error'] != '') {
-       $message = '<span class="error" id="message">'.$_SESSION['error'].'</span>';
-       $_SESSION['error'] = '';
-   }
-   return $message;
+function messages()
+{
+  $message = '';
+  if ($_SESSION['success'] != '') {
+    $message = '<span class="success" id="message">' . $_SESSION['success'] . '</span>';
+    $_SESSION['success'] = '';
+  }
+  if ($_SESSION['error'] != '') {
+    $message = '<span class="error" id="message">' . $_SESSION['error'] . '</span>';
+    $_SESSION['error'] = '';
+  }
+  return $message;
 }
 
 // log user in function
-function login($username, $password){
+function login($username, $password)
+{
 
- //call safestrip function
- $user = safestrip($username);
- $pass = safestrip($password);
+  //call safestrip function
+  $user = safestrip($username);
+  $pass = safestrip($password);
 
- //convert password to md5
- $pass = md5($pass);
+  //convert password to md5
+  $pass = md5($pass);
 
   // check if the user id and password combination exist in database
-  $sql = mysql_query("SELECT * FROM table WHERE username = '$user' AND password = '$pass'")or die(mysql_error());
+  $sql = mysql_query("SELECT * FROM table WHERE username = '$user' AND password = '$pass'") or die(mysql_error());
 
   //if match is equal to 1 there is a match
   if (mysql_num_rows($sql) == 1) {
 
-                          //set session
-                          $_SESSION['authorized'] = true;
+    //set session
+    $_SESSION['authorized'] = true;
 
-                          // reload the page
-                         $_SESSION['success'] = 'Login Successful';
-                         header('Location: ./index.php');
-                         exit;
-
-
-   } else {
-               // login failed save error to a session
-               $_SESSION['error'] = 'Sorry, wrong username or password';
+    // reload the page
+    $_SESSION['success'] = 'Login Successful';
+    header('Location: ./index.php');
+    exit;
+  } else {
+    // login failed save error to a session
+    $_SESSION['error'] = 'Sorry, wrong username or password';
   }
 }
 ?>
