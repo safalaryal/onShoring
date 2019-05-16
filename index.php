@@ -27,7 +27,7 @@
       <input type="phone" class="form-control" name="visitorCompany" id="Visitor_Company" placeholder="Company's Name(optional)">
     </div>
     <div class=" col-md-4 form-group " style="display:inline-block">
-      <select class="dropdown btn-lg btn-secondary dropdown-toggle" name="visitorGender" required>
+      <select class="dropdown btn-lg btn-secondary dropdown-toggle" id="visitorGender" name="visitorGender" required>
         <option selected hidden value="">Gender</option>
         <option value="m">Male</option>
         <option value="f">Female</option>
@@ -35,7 +35,7 @@
       </select>
     </div>
     <div class=" col-md-4 form-group " style="display:inline-block">
-      <select name="visitorVisiting" style="text-align:center text-align-last:center  " class="dropdown btn-lg btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" required>
+      <select name="visitorVisiting" id="visitor_Visiting" class="dropdown btn-lg btn-secondary dropdown-toggle" data-toggle="dropdown">
         <option selected hidden value="">Visiting?</option>
         <option value="John">John Benjamin</option>
         <option value="Alberta">Alberta wick</option>

@@ -1,5 +1,6 @@
 
 <?php
+
 $visitorName = $_POST['visitorName'];
 $visitorSurname = $_POST['visitorSurname'];
 $visitorGender = $_POST['visitorGender'];
@@ -11,7 +12,7 @@ $visitorCompany = $_POST['visitorCompany'];
 $visitorImage = $_POST['visitorImage'];
 
 
-if (!empty($visitorName) || !empty($visitorSurname) || !empty($visitorGender) || !empty($visitorEmail) || !empty($visitorPhone) || !empty($visitorVisiting || !empty($visitorType))) {
+if (!empty($visitorName) || !empty($visitorSurname) || !empty($visitorGender) || !empty($visitorEmail) || !empty($visitorPhone) || !empty($visitorVisiting || !empty($visitorType) || !empty($visitorImage))) {
     $host = "localhost";
     $dbUsername = "root";
     $dbPassword = "";
@@ -24,19 +25,19 @@ if (!empty($visitorName) || !empty($visitorSurname) || !empty($visitorGender) ||
 
 
         $SELECT = "SELECT email From visitor_Entry Where email = ? Limit 1";
-        $SELECT = "SELECT email From visitor_Entry Where phone = ? Limit 1";
-        $INSERT = "INSERT Into visitor_Entry (name, surname, phone,email,company_name,gender, visiting_patient, visitor_type,image) values(?, ?,?, ?, ?, ?, ?,?)";
+
+        $INSERT = "INSERT Into visitor_Entry (name, surname, phone,email,company_name,gender, visiting_patient, visitor_type,image) values(?, ?,?, ?, ?, ?, ?,?,?)";
         //Prepare statement
         $stmt = $conn->prepare($SELECT);
-        $stmt->bind_param("s", $email);
+        $stmt->bind_param("s", $visitorEmail);
         $stmt->execute();
-        $stmt->bind_result($email);
+        $stmt->bind_result($visitorEmail);
         $stmt->store_result();
         $rnum = $stmt->num_rows;
         if ($rnum == 0) {
             $stmt->close();
             $stmt = $conn->prepare($INSERT);
-            $stmt->bind_param("sssssss", $username, $password, $gender, $email, $phoneCode, $phone);
+            $stmt->bind_param("ssssssssb", $visitorName, $visitorSurname, $visitorPhone, $visitorEmail, $visitorCompany, $visitorGender,  $visitorVisiting, $visitorType, $visitorImage);
             $stmt->execute();
             echo "New record inserted sucessfully";
         } else {
